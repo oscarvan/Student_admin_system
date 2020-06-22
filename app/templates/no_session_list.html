@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+
+<!--place where templates can be inserted. Blocks are given a unique name that templates can reference julie-->
+{% block content %}
+    <!--table for no_session by particular branch , session, date.
+        by julie -->
+
+<div class ="container-fluid px-20 py-10 pt-sm-2 pb-sm-2 main-color-bg">
+        <div class="row align-items-center">
+            <div class="col-md-3" >
+                <img src="static/images/Ara-Landscape-Logo.png"  class="img-responsive" alt="Responsive image" width="80%">
+            </div>
+            <div class="col-md-9">
+                <div class="container fluid">
+        
+                <div class ="danger"> 
+                        <div class ="danger"> 
+                                <h4>Holiday & Dates Closed for Campus</h4>
+                                <h6>note NZ statutory holidays are calculated already</h6>
+                            </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+            
+            
+
+    <div class="container fluid">
+            <div class="form-group">
+              <table id="nosession_table" class = 'table' style = 'margin-left: 100px; margin-right: 0px; width: 90%;'>
+                  <thead>
+                        <tr>
+                            <th>Campus</th>
+                            <th>Start Date</th>
+                            <th>End Date</th>
+                            <th></th>
+                            
+                        </tr>
+          
+          
+          
+                  </thead>
+                  <tbody>
+                    {% for nosession in list_nosessions %}
+                      <tr>                          
+                          <td>{{nosession["campusName"]}}</td>
+                          <td>{{nosession["startDate"]}}</td>
+                          <td>{{nosession["endDate"]}}</td>
+                          <td> <a href = "{{ url_for('delete_no_session', noSessionID=nosession['noSessionID']) }}" class="btn btn-info" role="button">Delete</a> </td>
+                      </tr>
+                    {% endfor %}
+                  </tbody>
+                  <tr>                        
+                        <td> <a href = "{{ url_for('add_no_session') }}" class="btn btn-info" role="button">Add New ClosedDate</a> </td>        
+                    </tr>
+              </table>
+            </div>
+          </div>
+
+          {% endblock %}

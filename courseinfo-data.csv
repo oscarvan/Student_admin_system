@@ -1,0 +1,26 @@
+courseID,courseName,program,durationInDay,durationInWeek,numberOfSession,CampusID,CourseAvailabiity
+CFCB110,Computing Basics,ACE,70,10,20,1,1
+CFDB110,Access for Beginners,ACE,56,8,16,2,2
+CFDB310,Access Enhanced,ACE,63,9,18,3,1
+CFDC110,Digital Communications for Beginners,ACE,35,5,10,4,2
+CFDK110,Publisher for Beginners,ACE,70,10,20,5,1
+CFKY110,Keyboarding for Beginners,ACE,42,6,12,6,2
+CFPP110,PowerPoint for Beginners,ACE,35,5,10,7,1
+CFPS110,Photoshop for Beginners,ACE,70,10,20,1,2
+CFSP110,Excel for Beginners,ACE,70,10,20,2,1
+CFSP310,Excel Enhanced,ACE,56,8,16,3,2
+CFWB110,Web Design for Beginners,ACE,70,10,20,4,1
+CFWP110,Word for Beginners,ACE,70,10,20,5,2
+CFWP310,Word Enhanced,ACE,84,12,24,6,1
+ITTL300,Operating in a Digital Environment,Level 3,112,16,32,7,2
+ITTL310,Spreadsheets and Databases,Level 3,112,16,32,1,1
+ITTL320,Web Fundamentals,Level 3,112,16,32,2,2
+ITTL330,Presenting in a Digital Environment,Level 3,112,16,32,3,1
+ITTL340,Going Mobile,Level 3,112,16,32,4,2
+ITTL350,Online Etiquette and Ethics,Level 3,112,16,32,5,1
+ITTL400,Advanced Tools A,Level 4,112,16,32,6,2
+ITTL410,Advanced Tools B,Level 4,112,16,32,7,1
+ITTL420,Project Planning,Level 4,112,16,32,1,2
+ITTL430,Problem Solving,Level 4,112,16,32,2,1
+ITTL440,Connecting in a Business Environment,Level 4,112,16,32,3,2
+ITTL450,Security and Future Trends,Level 4,112,16,32,4,1

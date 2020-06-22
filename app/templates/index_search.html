@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+
+<!--place where templates can be inserted. Blocks are given a unique name that templates can reference -->
+{% block content %}
+    <!--shows current staff member logged in -->
+    <div class="container fluid"><h3>{{ current_user.username }} is logged in!</h3></div>
+
+
+    <div class="container fluid"></a></div>
+    <div class="form-group">
+        <div class="container fluid">
+            <table id="student_search_table" class = "display" style = "margin-left: 100px; margin-right: 100px; width: 90%;">
+                <thead>
+                <th>ID</th>
+                <th>First name</th>
+                <th>Last name</th>
+                <th>Email Address</th>
+                <th>Select</th>
+
+                </thead>
+                <tbody>
+                {% for student in list_of_students %}
+                        <tr>
+                            <td> <a data-toggle="tooltip" title="Click to View Student Details" href = "{{ url_for('edit_student', studentID=student['studentID']) }}">{{student["studentID"]}}</a> </td>
+
+                            <td>{{student["firstName"]}}</td>
+                            <td>{{student["lastName"]}}</td>
+                            <td>{{student["emailAddress"]}}</td>
+                            <td>
+                            <a href = "{{ url_for('enrol', studentID=student['studentID']) }}" class="btn btn-info" role="button" onclick="removeNotice()">Select</a>
+                            </td>
+
+                        </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <!--This script is for student search datatable-->
+    <script type="text/javascript" class="init">$(document).ready( function () {
+        $('#student_search_table').DataTable({
+         "search": {
+                     "smart": false
+                   }})});
+    </script>
+
+{% endblock %}

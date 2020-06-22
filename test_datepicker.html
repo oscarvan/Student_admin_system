@@ -1,0 +1,128 @@
+<html>
+    <head>
+        <!--Bootstraps 3 tags that must be at the beginning of the <head> tag for text
+    encoding and improved visualization on mobile devices: -->
+        <!--viewport tag is mobile-first ensures proper rendering in mobile devices and touch zooming -->
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width,
+        initial-scale=1, shrink-to-fit=yes">
+        <!--Title of page if sent/rendered to HTML -->
+        
+        
+                <title>ARA Computing fo Free</title>
+                <meta name="description" content="">
+        
+
+            <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+                <!-- <link rel="stylesheet" href="/resources/demos/style.css"> -->
+                <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.18/css/dataTables.bootstrap4.min.css"/>            
+            
+                <!--loaded for datasheet bootstrap4-->
+                <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/jq-3.3.1/dt-1.10.18/r-2.2.2/datatables.min.css"/>
+                <script type="text/javascript" src="https://cdn.datatables.net/v/dt/jq-3.3.1/dt-1.10.18/r-2.2.2/datatables.min.js"></script>
+
+
+                <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+                <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+                <script type="text/javascript" src="https://cdn.datatables.net/1.10.18/js/jquery.dataTables.min.js"></script>
+                <script type="text/javascript" src="https://cdn.datatables.net/1.10.18/js/dataTables.bootstrap4.min.js"></script>
+                
+                  <!--needed for the menu -->
+                  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+                 
+                  <!-- popper and bootstrap.js need to be loaded after bootstrap -->
+                  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+                  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
+ 
+                
+
+
+<!--header passes list of disabled dates for the dropdown selected location-->
+                  <script>
+                    var array = ['2018-10-10', '2018-10-11', '2018-10-10'] 
+                      $( function() {
+                        $('#datepicker').datepicker({
+                              onSelect: function (dateText, inst) {
+                                //alert({{ url_for('julieindex',  datepicker =dateText) }});
+                         //       alert(dateText);   
+//                                document.getElementById('sessionMenu').innerHTML ='<a class="dropdown-item" href="#">' + dateText + '</a>';
+                                updateCaption();
+
+                                                                                 
+                              },
+     
+                                beforeShowDay: function(date){
+                                var string = jQuery.datepicker.formatDate('yy-mm-dd', date);
+                                return [ array.indexOf(string) == -1 ]
+                            }
+
+                          });
+                      } );
+
+
+                      function updateCaption()
+                        {
+                            $.ajax({url: "test_json.html", success: function(result){
+                                    $("#sessionMenu").html(result);
+                                }});
+                        }
+                      </script>
+
+
+                <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/flickity/2.0.10/flickity.pkgd.min.js"></script>
+                <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/smooth-scroll/12.1.5/js/smooth-scroll.polyfills.min.js"></script>
+                <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.10.0/prism.min.js"></script>
+                <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+
+
+        <script>$(function () {
+            $('[data-toggle="tooltip"]').tooltip()
+          }
+          )</script>
+
+  <hr>
+
+
+<div class="container">
+            <h4>{{ current_user.username }} is logged in</h4>
+            <br>
+        <h3>Class Session</h3>
+        <div class="row">
+                <div class="col-md-4">
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-primary">Branch</button>
+                            <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown">
+                            </button>
+                            <div class="dropdown-menu" id="campusID" name="campusID">
+                            <a class="dropdown-item" href="{{ url_for('julieindex', campusID=1) }}" value="1">Ara City</a>
+                            <a class="dropdown-item" href="{{ url_for('julieindex', campusID=2) }}" value="2">Bisphopdale</a>
+                            <a class="dropdown-item" href="#" value="3">Hornby</a>
+                            <a class="dropdown-item" href="#" value="4">New Brighton </a>
+                            <a class="dropdown-item" href="#" value="5">Rangiora </a>
+                            <a class="dropdown-item" href="#" value="6">Timaru</a>
+                            <a class="dropdown-item" href="#" value="7">Oamaru</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="container col-md-4">
+                            <p>Date: <input type="text" id="datepicker" name="datepicker" ></p>
+                          </div>
+                    <div class="col-md-4">                       
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-primary">Session</button>
+                            <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown">
+                            </button>
+                            <div class="dropdown-menu" id='sessionMenu'>
+                                <a class="dropdown-item" href="#">Morning</a>
+                                <a class="dropdown-item" href="#">Afternoon</a>
+                                <a class="dropdown-item" href="#">Evening</a>
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+                    </div>
+        
+        </body>
+</html>

@@ -1,0 +1,28 @@
+__pycache__/
+
+app/__pycache__/routes.cpython-37.pyc
+app/__pycache__/__init__.cpython-37.pyc
+*.pyc
+app/__pycache__/forms.cpython-37.pyc
+app/__pycache__/forms.cpython-37.pyc
+app/__pycache__/__init__.cpython-37.pyc
+<<<<<<< HEAD
+app/__pycache__/__init__.cpython-37.pyc
+*.pyc
+*.pyc
+*.pyc
+=======
+app/.DS_Store
+.DS_Store
+.DS_Store
+app/.DS_Store
+.DS_Store
+.DS_Store
+app/.DS_Store
+.DS_Store
+app/.DS_Store
+.DS_Store
+>>>>>>> ff3c0ca0529050127856ecc89c9b08881aed0605
+app/__pycache__/models.cpython-37.pyc
+*.pyc
+*.pyc

@@ -1,0 +1,159 @@
+<!--  Kattia's Code -->
+
+{% extends "base.html" %}
+
+
+{% block content %}
+
+<br>
+<br>
+
+<div class="container">
+    
+    {% if Student_Enrolled %}
+
+    <h2> You enrolled the student into the course, they will finish on {{end_date}} </h2>
+
+    {% elif Student_Enrolled == False %}
+
+    <h2> Sorry something wrong has happened, enrollment not successful </h2>
+
+    {% endif %}
+
+    <br>
+    <h4> Currently {{student['firstName']}} {{student['lastName']}} has completed or is currently enrolled in the following courses </h4>
+    <br>
+
+
+
+   
+    <tr>
+
+    <table id="course_record_table" class = "display"  margin-right: 100px; width: 90%;>
+            <thead>
+            <th>Course Name</th>
+            <th>Program</th>
+            <th>Start Date</th>
+            <th>Last Withdrawl Date</th>
+            <th>Date Withdrew</th>
+            <th>end date</th>
+            <th>Withdraw</th>
+            <th></th>
+            <th></th>
+            </thead>
+        <tbody>   
+
+            {% for course in list_of_student_historic %}
+           
+            <form class="form-inline" action="/enrol" method="POST" name="withdraw">
+                <td><input type="courseName" class="form-control mb-2 mr-sm-2" id="courseName" name="courseName" value="{{course['courseName']}}" readonly ></td>        
+                
+                <td><input type="program" class="form-control mb-2 mr-sm-2" id="program" name="program" value="{{course['program']}}" readonly ></td> 
+
+                <td><input type="startDate" class="form-control mb-2 mr-sm-2" id="startDate" name="startDate" value="{{course['startDate']}}" readonly ></td> 
+
+                <td><input type="LWD" class="form-control mb-2 mr-sm-2" id="LWD" name="LWD" value="{{course['lastWithdrawDate']}}" readonly ></td>
+                
+                <td><input type="AWD" class="form-control mb-2 mr-sm-2" id="AWD" name="AWD" value="{{course['actualWithdrawDate']}}" readonly ></td>
+
+                <td><input type="AED" class="form-control mb-2 mr-sm-2" id="AED" name="AED" value="{{course['actualEndDate']}}" readonly ></td>
+
+                <td style = "display: none"> <input type="courseID" class="form-control mb-2 mr-sm-2" name="courseID" id="courseID" value="{{course['courseID']}}"></td>
+                
+                <td style = "display: none"> <input type="studentID" class="form-control mb-2 mr-sm-2" name="studentID" id="studentID" value="{{course['studentID']}}"></td>
+            
+                <td><button data-toggle="tooltip" title="withdraw_button" value="withdraw_button" name="withdraw_button"  type="submit" class="btn btn-primary mb-2" > Withdraw </button>  </td>
+
+                <td><button data-toggle="tooltip" title="actualEndDate_button" value="actualEndDate_button" name="actualEndDate_button"  type="submit" class="btn btn-primary mb-2" > finish </button>  </td>
+            </form>
+            </tr>     
+            {% endfor %}
+        </tbody> 
+        
+    </table>
+
+
+
+
+    <br>
+    <br>
+    <br>
+    <h4> Please select a program level </h4>
+
+
+<form action= "/enrol" method="GET" name="Program">
+    <select name="program_selected" id="program_selected" onchange="this.form.submit()">
+            <option value=""> Please Select </option>
+            <option value="{'program':'ACE','studentID':'{{student['studentID']}}'}"> ACE </option>
+            <option value="{'program':'Level 3','studentID':'{{student['studentID']}}'}">Level 3</option>
+            <option value= "{'program':'Level 4','studentID':'{{student['studentID']}}'}"> Level 4</option>
+
+            
+          </select>
+</form>
+
+
+
+
+    {% if programChosen %}
+
+    <br>
+    <h4> Please select a course for {{student['firstName']}} {{student['lastName']}}  to enrol in. </h4>
+    <br>  
+    
+<table id="select_course_table" class = "display"  margin-right: 100px; width: 90%;>
+    <thead>
+    <th>Course ID</th>
+    <th>Course Name</th>
+    <th>Program</th>
+    <th>Campus ID</th>
+    <th>Enrol</th>
+  
+    <th></th>
+    </thead>
+    <tbody>
+
+
+    {% for course in list_of_courses %}
+    <tr>
+        <form class="form-inline" action="/enrol" method="POST">
+            
+            <td><input type="courseID" class="form-control mb-2 mr-sm-2" id="courseID" name="courseID" value="{{course['courseID']}}" readonly ></td>    
+            
+            <td><input type="courseName" class="form-control mb-2 mr-sm-2" name="courseName" value="{{course['courseName']}}" readonly ></td>    
+            
+            <td><input type="program" class="form-control mb-2 mr-sm-2" name="program" value="{{course['program']}}" readonly ></td>    
+            
+            <td><input type="Enrol" class="form-control mb-2 mr-sm-2" name="Enrol" value="{{course['courseAvailability']}}" readonly ></td>    
+            
+            <td><button type="submit" title="enrol_button" value="enrol_button" name="enrol_button" class="btn btn-primary mb-2">Enrol</button>  </td>
+                
+            <td style = "display: none"> <input type="studentID" class="form-control mb-2 mr-sm-2" name="studentID" id="studentID" value="{{student['studentID']}}"></td>
+            
+        </form>
+        </tr>
+
+        
+       
+    {% endfor %}
+    </tbody>   
+</table>
+
+{% endif %}
+
+<br>
+<br>
+
+<h4><a href="{{ url_for('edit_student', studentID=student['studentID']) }}">click here to edit student</a></h4>
+<br>
+<br>
+<br>
+
+
+
+
+
+
+{% endblock %}
+
+<!--  Kattia's Code -->

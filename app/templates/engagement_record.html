@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+<!--place where templates can be inserted. Blocks are given a unique name that templates can reference by: julie and oscar -->
+{% block content %}
+
+<!--Engagement Record Table-->
+<div class="container" style = "max-width: 1100px;">
+  <table id="engagement_record_summary" class="table table-striped table-bordered" style="width:100%">
+    <thead>
+             <tr>
+               <th>Student ID</th>
+               <th>First Name</th>
+               <th>Last Name</th>
+               <th>Course Name</th>
+               <th>Latest Study Activity</th>
+               <th>Date of Last Study Activity</th>
+               <th>Date of Last Moodle Engagement</th>
+             </tr>
+    </thead>
+    <tbody>
+         {% for student in last_engagement_summary %}
+            <tr>
+                <td><a data-toggle="tooltip" title="Click to View Student Details" href = "{{ url_for('edit_student', studentID=student['studentID']) }}">{{student["studentID"]}}</a></td>
+                <td>{{student["firstName"]}}</td>
+                <td>{{student["lastName"]}}</td>
+                <td>{{student["courseName"]}}</td>
+                <td>{{student["action"]}}</td>
+                <td>{{student["actionTime"]}}</td>
+                <td>{{student["lastMoodleEngagement"]}}</td>
+             </tr>
+         {% endfor %}
+    </tbody>
+  </table>
+</div>
+
+   <!--DataTable JS-->
+   <script>
+   $(document).ready(function() {
+       $("#engagement_record_summary").DataTable();
+   } );
+   </script>
+
+{% endblock %}

@@ -1,0 +1,142 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class ="container-fluid px-20 py-10 pt-sm-2 pb-sm-2 main-color-bg">
+  <div class="row align-items-center">
+    <div class="col-md-3" >
+      <img src="static/images/Ara-Landscape-Logo.png"  class="img-responsive" alt="Responsive image" width="80%">
+    </div>
+    <div class="col-md-9">
+      <h2>CFF Sudent Mangement System</h2>
+    </div>
+  </div>
+</div>
+
+<div class="container pt-sm-3 pb-sm-1">
+     <div class="card-deck mb-3 text-center">
+       <div class="card mb-4 box-shadow">
+         <div class="card-header">
+           <h4 class="my-0 font-weight-normal">Engagement Record</h4>
+         </div>
+         <div class="card-body text-center">
+           <h1 class="engagement record summary"> {{number_of_inactive_student}} <small class="text-muted">/ students</small></h1>
+           <br>
+           <h5> have zero </h5>
+           <h5> recorded learning activity  </h5>
+           <h5> in the last seven days  </h5>
+           <br>
+           <a href="{{ url_for('engagement_record') }}" class="btn btn-lg btn-block btn-primary">More Details</a>
+         </div>
+       </div>
+       <div class="card mb-4 box-shadow">
+         <div class="card-header">
+           <h4 class="my-0 font-weight-normal">Course Completion Tracker</h4>
+         </div>
+         <div class="card-body text-center">
+           <h1 class="student profile summary"> {{number_gf_student}} <small class="text-muted">/ students</small></h1>
+           <br>
+           <h5> is going to reach </h5>
+           <h5> the course end day </h5>
+           <h5> today  </h5>
+           <br>
+           <a href="{{ url_for('student_profile') }}" class="btn btn-lg btn-block btn-primary">More Details</a>
+         </div>
+       </div>
+       <div class="card mb-4 box-shadow">
+         <div class="card-header">
+           <h4 class="my-0 font-weight-normal">Facility Usage</h4>
+         </div>
+         <div class="card-body text-center">
+           <h1 class="facility usage summary"> ?? <small class="text-muted">/ sessions</small></h1>
+           <br>
+           <h5> have zero </h5>
+           <h5> student attendance  </h5>
+           <h5> in the last school day  </h5>
+           <br>
+           <a href="{{ url_for('facility_usage_record') }}" class="btn btn-lg btn-block btn-primary">More Details</a>
+         </div>
+       </div>
+      </div>
+     </div>
+
+
+<!--chart-->
+<div id="container" class="col-md-6" style="min-width: 210px; max-width: 950px; height: 450px; margin: 0 auto"></div>
+
+<br>
+<br>
+
+<!--Engagement Record Table-->
+<div class="container" style = "max-width: 1100px;">
+  <table id="engagement_record_summary" class="table table-striped table-bordered" style="width:100%">
+      <thead>
+      {% if last_engagement_summary %}
+          <tr>
+            {% for key in last_engagement_summary[0] %}
+              <th> {{ key }} </th>
+              {% endfor %}
+          </tr>
+      {% endif %}
+      </thead>
+      <tbody>
+
+      {% for student in last_engagement_summary %}
+          <tr>
+            {% for value in student.values() %}
+              <td>{{value}}</td>
+            {% endfor %}
+          </tr>
+             {% endfor %}
+        </tbody>
+   </table>
+
+
+
+<!--highcharts JS-->
+<script src="https://code.highcharts.com/highcharts.js"></script>
+  <script>
+    Highcharts.chart('container', {
+  chart: {
+    type: 'bar'
+  },
+  title: {
+    text: "Session Attendance Summary in the Last School Day"
+  },
+  xAxis: {
+    categories: ['Ara City', 'Bishopdale', 'Hornby', 'New Brighton', 'Rangiora', 'Timaru', 'Oamaru']
+  },
+  yAxis: {
+    min: 0,
+    title: {
+      text: 'Number of Students Attented Class'
+    }
+  },
+  legend: {
+    reversed: true
+  },
+  plotOptions: {
+    series: {
+      stacking: 'normal'
+    }
+  },
+  series: [{
+    name: 'Evening',
+    data: [20, 1, 0, 9, 8, 12, 5]
+  }, {
+    name: 'Afternoon',
+    data: [18, 15, 20, 17, 15, 7, 5]
+  }, {
+    name: 'Morning',
+    data: [13, 14, 4, 2, 15, 7, 9]
+  }]
+});
+    </script>
+
+<!--DataTable JS-->
+<script>
+$(document).ready(function() {
+    $("#engagement_record_summary").DataTable();
+} );
+</script>
+
+{% endblock %}

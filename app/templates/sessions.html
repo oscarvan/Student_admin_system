@@ -1,0 +1,98 @@
+{% extends "base.html" %}
+        
+<!--place where templates can be inserted. Blocks are given a unique name that templates can reference by: julie and oscar -->
+{% block content %}
+<div class ="container-fluid px-20 py-10 pt-sm-2 pb-sm-2 main-color-bg">
+    <div class="row align-items-center">
+        <div class="col-md-3" >
+            <img src="static/images/Ara-Landscape-Logo.png"  class="img-responsive" alt="Responsive image" width="80%">
+        </div>
+        <div class="col-md-9">
+            <div class="container fluid">
+                <div class ="danger"> 
+                        <h4>Select branch here:</h4>
+                </div>
+                
+                <select class="form-control" id="session_campus" name="session_campus">
+                        <option value=None> Select Campus</option>
+                        {% for campus in campus_list %}
+                        <option value="{{campus['campusID']}}"{% if ecampusID | int ==campus['campusID'] %} selected {% endif %}>{{campus['campusName']}}</option>
+                        {% endfor %}
+                </select>
+            </div>
+        </div>
+    </div>
+</div>
+      
+
+
+    
+
+              <table id="sessions_table" class = 'table' style = 'margin-left: 100px; margin-right: 0px; width: 90%;'>
+                  <thead>
+                        <tr>
+                            <th>Time Slot</th>
+                            <th>Monday</th>
+                            <th>Tuesday</th>
+                            <th>Wednesday</th>
+                            <th>Thursday</th>
+                            <th>Friday</th>
+                            <th>Saturday</th>
+                        </tr>
+          
+          
+          
+                  </thead>
+                  <tbody>
+                <form action = "{{ url_for('save_weekly_sessions')}}" name="sessions_form" id="sessions_form" method = "POST">
+ 
+                    <tr>   
+                        <td>Morning Sessions</td> 
+                        {% for session in list_of_sessions %}                                                                                    
+                        <td><input type="checkbox" class="form-check-input" name= "value={{session["sessionID"]}}" id="value={{session["sessionID"]}}" {% if session['isActive'] %} checked {% endif %}></td> 
+                        {% endfor %}
+                    </tr>
+                    <tr>   
+                    <td>Afternoon Sessions</td> 
+                        {% for session in list_of_PMsessions %}                                    
+                        <td><input type="checkbox" class="form-check-input" name= "value={{session["sessionID"]}}" id="value={{session["sessionID"]}}" {% if session['isActive'] %} checked {% endif %}></td> 
+                        {% endfor %}
+                    </tr>
+                    <tr>   
+                    <td>Evening Sessions</td> 
+                        {% for session in list_of_Evesessions %}                                    
+                        <td><input type="checkbox" class="form-check-input" name= "value={{session["sessionID"]}}" id="value={{session["sessionID"]}}" {% if session['isActive'] %} checked {% endif %}></td> 
+                        {% endfor %}
+                    </tr>
+                    <tr>
+                    <td>
+                            <div class="form-row">
+                                    <div class="form-group col-md-6">          
+                                        <input type = "submit" value = "Save Session Info" class="btn btn-primary"/><br>
+                                    </div>
+                            </div>
+                        </td>
+                    </tr>
+                    <input type = "hidden" name="campusID" value="{{ecampusID}}"/>
+                </form>
+                </tbody>
+              </table>
+            </div>
+<script>
+            //campus menu click on sessions_schedule page    load campus specific 
+            document.addEventListener('DOMContentLoaded',function() {
+                document.querySelector('select[name="session_campus"]').onchange=changeSessionCampus;
+            },false);
+            //campus session_campus
+            function changeSessionCampus(event) {
+                // You can use “this” to refer to the selected element.
+                if(!event.target.value) alert('Please Select campus');
+                else 
+                //alert('You clicked' + event.target.value + "/session_schedule?campusid=" + event.target.value  );//"&campusid={{campusID|safe}}"); 
+                window.location = "/session_schedule?campusid=" + event.target.value;
+                
+            }
+
+
+</script>
+{% endblock %}

@@ -1,0 +1,105 @@
+{% extends "base.html" %}
+
+<!--place where templates can be inserted. Blocks are given a unique name that templates can reference 
+    by julie-->
+{% block content %}
+<div class="jumbotron" style="background:#54adc4 !important">
+<div class="container fluid">
+    <form class="form-group" action ="{{url_for('update_no_session') }}" method = "POST">
+            
+        <div class="row">
+            <div class="col-12">
+            
+                    <div class ="danger"> 
+                        <h4>Enter Holiday Date Closed for Campus</h4>
+                        <h6>note NZ statutory holidays are calculated already</h6>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+        <div class="form-row">
+                <div class="form-group col-md-6">
+                <label for="exampleFormControlSelect1">Campus</label>
+                <select class="form-control" id="campus_no_session" name="campus_no_session" data-toggle="tooltip" title="Select the Campus">
+                        <option value=None> Select Campus</option>
+                        {% for campus in campus_list %}
+                        <option value="{{campus['campusID']}}"{% if row['campusID']==campus['campusID'] %} selected {% endif %}>{{campus['campusName']}}</option>
+                        {% endfor %}
+                </select>
+                </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-md-6">
+            <label for="StartDatepicker">Start Date</label>
+                <input type="text" id="StartDatepicker" name="StartDatepicker" {% if row %}value="{{row['startDate']}}"{%endif%} value="{{row['startDate']}}" data-toggle="tooltip" title="Start date of holiday"></p>
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group col-md-6">
+            <label for="EndDatepicker">End Date</label>
+                <input type="text" id="EndDatepicker" name="EndDatepicker" {% if row %}value="{{row['endDate']}}"{%endif%} value="{{row['endDate']}}" data-toggle="tooltip" title="End date of holiday"></p>
+            </div>
+        </div>
+        <div class="form-row">
+                <div class="form-group col-md-6">          
+                    <input type = "submit" value = "Save Holiday Info" class="btn btn-primary"/><br>
+                </div>
+        </div>
+        
+            <input type = "hidden" name="noSessionID" {% if row %}value="{{row['noSessionID']}}"{%endif%}/>
+      
+    
+    </div>
+
+</form>
+
+<script>
+//passes list of disabled dates for the dropdown statuatory
+    var array = {{ disabled_dates|safe }}                 
+        $( function() {
+            $('#EndDatepicker').datepicker({
+                onSelect: function (dateText, inst) {
+//                         alert(dateText);   
+//                           document.getElementById('sessionMenu').innerHTML ='<a class="dropdown-item" href="#">' + dateText + '</a>';
+                    updateCaption(dateText);
+
+                },
+
+                    dateFormat: "dd-mm-yy",
+
+                    beforeShowDay: function(date){
+                    var string = jQuery.datepicker.formatDate('dd-mm-yy', date);
+                    return [ array.indexOf(string) == -1 ]
+                }
+            });
+        } );
+    
+    //passes list of disabled dates for the dropdown selected location
+    var array = {{ disabled_dates|safe }}                 
+        $( function() {
+            $('#StartDatepicker').datepicker({
+                onSelect: function (dateText, inst) {
+//                         alert(dateText);   
+//                           document.getElementById('sessionMenu').innerHTML ='<a class="dropdown-item" href="#">' + dateText + '</a>';
+                    updateCaption(dateText);
+
+                },
+
+                    dateFormat: "dd-mm-yy",
+
+                    beforeShowDay: function(date){
+                    var string = jQuery.datepicker.formatDate('dd-mm-yy', date);
+                    return [ array.indexOf(string) == -1 ]
+                }
+            });
+        } );
+
+    
+
+    </script>
+
+    
+{% endblock %}

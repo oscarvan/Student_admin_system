@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class ="container-fluid px-20 py-10 pt-sm-2 pb-sm-2 main-color-bg">
+        <div class="row align-items-center">
+            <div class="col-md-3" >
+                <img src="static/images/Ara-Landscape-Logo.png"  class="img-responsive" alt="Responsive image" width="80%">
+            </div>
+            <div class="col-md-9">
+                <div class="container fluid">
+        
+                <div class ="danger"> 
+                        <div class ="danger"> 
+                             <!--   <h4>Holiday & Dates Closed for Campus</h4>
+                                <h6>note NZ statutory holidays are calculated already</h6> -->
+                            </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+<br>
+
+<div class="container">
+    <h1>New Staff Login</h1>
+    <form action="" method="post">
+        {{ form.hidden_tag() }}
+        <p>
+            {{ form.username.label }}<br>
+            {{ form.username(size=32) }}<br>
+            {% for error in form.username.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </p>
+        <p>
+            {{ form.email.label }}<br>
+            {{ form.email(size=64) }}<br>
+            {% for error in form.email.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </p>
+        <p>
+            {{ form.password.label }}<br>
+            {{ form.password(size=32) }}<br>
+            {% for error in form.password.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </p>
+        <p>
+            {{ form.password2.label }}<br>
+            {{ form.password2(size=32) }}<br>
+            {% for error in form.password2.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </p>
+
+        <p>
+            {{ form.campusID.label }}<br>
+            {{ form.campusID }}<br>
+        </p>
+
+        <p>{{ form.submit() }}</p>
+    
+    </form>
+</div>
+{% endblock %}

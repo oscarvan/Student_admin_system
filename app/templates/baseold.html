@@ -1,0 +1,146 @@
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="description" content="">
+<meta name="author" content="">
+<link rel="icon" href="../../../../favicon.ico">
+
+<title>ARA Computing fo Free</title>
+
+<!-- Bootstrap core CSS -->
+<link href="static/styles/css/bootstrap.min.css" rel="stylesheet">
+
+<!-- Custom styles for this template -->
+<link href="static/styles/css/style.css" rel="stylesheet">
+<link rel=stylesheet href="{{ url_for('static', filename='cff.css') }}">
+
+<!-- jQuery UI CSS -->
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
+<!--loaded for datasheet bootstrap4-->
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.18/css/dataTables.bootstrap4.min.css"/>
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/jq-3.3.1/dt-1.10.18/r-2.2.2/datatables.min.css"/>
+<script type="text/javascript" src="https://cdn.datatables.net/v/dt/jq-3.3.1/dt-1.10.18/r-2.2.2/datatables.min.js"></script>
+
+
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/1.10.18/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/1.10.18/js/dataTables.bootstrap4.min.js"></script>
+
+<!--needed for the menu -->
+<!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">-->
+
+<!-- popper and bootstrap.js need to be loaded after bootstrap -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
+
+
+<!--passes list of disabled dates for the dropdown selected location-->
+
+</head>
+
+<body>
+
+<nav class="navbar navbar-expand-lg sticky-top">
+   <a class="navbar-brand" href="#">Computing For Free</a>
+   
+   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCFFnavbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+   <span class="navbar-toggler-icon"></span>
+   
+   </button>
+
+   <div class="collapse navbar-collapse" id="CFFnavbar">
+     <ul class="navbar-nav mr-auto">
+       <li class="nav-item active">
+         <a class="nav-link" href="{{ url_for('index') }}">Home <span class="sr-only">(current)</span> </a>
+       </li>
+       <li class="nav-item dropdown">
+         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+         Student
+         </a>
+         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+           <a class="dropdown-item" href="{{ url_for('student_search') }}">Search</a>
+           <a class="dropdown-item" href="{{ url_for('student') }}">Add student</a>
+           <a class="dropdown-item" href="{{ url_for('enrol') }}">Enrol student</a>
+           <a class="dropdown-item" href="{{ url_for('enrol') }}">Edit student</a>
+           <a class="dropdown-item" href="{{ url_for('enrol') }}">Deactivate student</a>
+         </div>
+       </li>
+       <li class="nav-item dropdown">
+           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+           Session Availability
+           </a>
+           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+             <a class="dropdown-item" href="{{ url_for('session_schedule') }}">Session Schedule</a>
+             <a class="dropdown-item" href="{{ url_for('no_session') }}">Dates Closed/Holidays</a>
+           </div>
+       </li>
+       <li class="nav-item dropdown">
+         <a class="nav-link dropdown-toggle" href="{{url_for('report_dashboard')}}" id="navbarDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+           Report Dashboard
+         </a>
+         <div class="dropdown-menu" aria-labelledby="navbardropdownMenuLink">
+           <a class="dropdown-item" href="{{ url_for('report_dashboard') }}">Report Home</a>
+           <a class="dropdown-item" href="{{ url_for('engagement_record') }}">Engagement Record</a>
+           <a class="dropdown-item" href="{{ url_for('student_profile') }}">Student Profile</a>
+           <a class="dropdown-item" href="{{ url_for('facility_usage_record') }}">Facility Usage Record</a>
+         </div>
+       </li>
+       <li class="nav-item dropdown">
+         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+           Staff
+         </a>
+         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+           <a class="dropdown-item" href="{{ url_for('register') }}">Add staff</a>
+           <a class="dropdown-item" href="{{ url_for('staff_list') }}">Staff List</a>
+         </div>
+       </li>
+     </ul>
+     <div class="d-flex justify-content-end">
+      {{ current_user.username }} is logged in
+      </div>
+     <div class="col-4 d-flex justify-content-end align-items-center">
+       {% if current_user.is_anonymous %}
+       <a href = "{{ url_for('login') }}" class="btn btn-success" role="button" >Log in</a>
+       {% else %} <!--else if logge in show logout-->
+       <a href = "{{ url_for('logout') }}" class="btn btn-success" role="button" >Log Out</a>
+       {% endif %}
+     </div>
+ </div>
+</nav>
+
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/flickity/2.0.10/flickity.pkgd.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/smooth-scroll/12.1.5/js/smooth-scroll.polyfills.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.10.0/prism.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+
+  <!--This prints off message on screens
+  get_flashed_messages comes from Flask, and returns a list of all the messages that have been registered julie-->
+      <!--<div class="container">
+          <div class="row" style="background:#54adc4 !important" >
+            <div class="col col-md-12" style="background:#54adc4 !important"> -->
+              <div style="background:#b7e0ec !important">
+                <div class="d-flex justify-content-center">
+                  <br>
+                {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                <ul>
+                    {% for message in messages %}
+                    <li>{{ message }}</li>
+                    {% endfor %}
+                </ul>
+
+                {% endif %}
+            {% endwith %}
+            </div>
+        </div>
+    
+      <!--This is where other HTML pages get inserted -->
+      {% block content %}{% endblock %}
+    <!--</div>-->
+    </body>
+
+</html>

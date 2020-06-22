@@ -1,0 +1,93 @@
+{% extends "base.html" %}
+
+
+{% block content %}
+
+
+      <div class ="container-fluid px-30 py-3 pt-sm-3 pb-sm-3 main-color-bg">
+        <div class="row align-items-center">
+          <div class="col-md-3" >
+          </div>
+          <div class="col-md-9"> 
+
+
+          {% if student_added %}
+
+          <h4> You added a new student, click  <a href= /enrol?studentID={{studentID}} >here</a> to enrol them </h4>
+           
+          {% elif student_added == False %}
+
+           <h4> Sorry something wrong has happened, enrollment not successful </h4> 
+
+          {% else %}
+            
+            
+            <h2>Add a new student here:</h2>
+          </div>
+        </div>
+      </div>
+
+        <div style='margin-left: 200px; width: 50%;'>
+
+          <br>
+          <br>
+          <br>
+
+ <form class="" action="/student" method="POST">
+
+  <div class="form-group">
+      <label for="studentID">StudentID:</label>
+      <input type="studentID" class="form-control" id="studentID" placeholder="" name="studentID">
+   </div>
+        
+    <div class="form-group">
+      <label for="firstName" style="text-transform: capitalize;">First name:</label> 
+      <input type="firstName" style="text-transform: capitalize;" class="form-control" id="firstName" placeholder=""  name="firstName">
+    </div>
+
+    <div class="form-group">
+      <p hidden>label for="middleName">Middle Name:</label>/p>
+      <p hidden>input type="middleName" class="form-control" id="middleName" placeholder="Enter middleName" name="middleName"/p>
+    </div>
+
+    <div class="form-group">
+      <label for="lastName"style="text-transform: capitalize;">Last name:</label>
+      <input type="lastName" style="text-transform: capitalize;" class="form-control" id="lastName" placeholder="" name="lastName">
+    </div>
+
+    <div class="form-group">
+      <p hidden>label for="gender">Gender:</label>
+      <p hidden>input type="gender" class="form-control" id="gender" placeholder="Enter gender" name="gender">
+    </div>
+
+    <div class="form-group">
+      <label for="homePhoneNumber">Home Phone Number:</label>
+      <input type="homePhoneNumber" class="form-control" id="homePhoneNumber" placeholder="" name="homePhoneNumber">
+    </div>
+
+    <div class="form-group">
+      <label for="PhoneNumber">Mobile Number:</label>
+      <input type="PhoneNumber" class="form-control" id="phoneNumber" placeholder="" name="MobileNumber">
+    </div>
+
+
+    <div class="form-group">
+      <label for="email">Email: </label>
+      <input type="email" class="form-control" id="email" placeholder="" name="email">
+    </div>
+
+    <button type="submit" class="dropdown-item" href="{{ url_for('student') }}"><a> Add student</a></button>
+
+
+      <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      
+      </button>
+    
+  </form>
+
+
+{% endif %}
+
+{% endblock %}
+
+

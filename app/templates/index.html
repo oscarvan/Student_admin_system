@@ -1,0 +1,275 @@
+{% extends "base.html" %}
+
+<!--place where templates can be inserted. Blocks are given a unique name that templates can reference julie-->
+{% block content %}
+<div class ="container-fluid px-20 py-10 pt-sm-2 pb-sm-2 main-color-bg">
+    <div class="row align-items-center">
+      <div class="col-md-3" >
+        <img src="static/images/Ara-Landscape-Logo.png"  class="img-responsive" alt="Responsive image" width="80%">
+      </div>
+      <div class="col-md-9">
+        <div class="container fluid">
+            <div class ="danger">
+                <h4>To Find a Class, Select branch, date, & session here:</h4>
+            </div>
+            <div class ='row'>
+
+                <div class="btn-group">
+                        <select class="form-control" id="campus" name="campus" data-toggle="tooltip" title="Select the Campus 1st to get Dates available">
+                                <option value=None> Select Campus 1st</option>
+                                {% for campus in campus_list %}
+                                <option value="{{campus['campusID']}}"{% if ecampusID ==campus['campusID'] %} selected {% endif %}>{{campus['campusName']}}</option>
+                                {% endfor %}
+                        </select>
+                    </div>
+
+
+                <div class="btn-group">
+                        <br>
+                        <input type="text" id="datepicker" name="datepicker" value="{{edatepicked}}" data-toggle="tooltip" title="Choose date to get Sessions available"></p>
+                </div>
+
+                <div class="btn-group">
+                <select class="form-control" id='sessionMenu' name='sessionMenu'>
+                        <option value=None>Select Session</option>
+                        {% for session in list_of_sessions %}
+                        <option value="{{session[0]}}"{% if esession | int == session[0] %} selected{% endif %}>{{session[1]}}</option>
+                        {% endfor %}
+                    </select>
+
+                </div>
+            </div>
+            </div>
+    </div>
+
+      </div>
+    </div>
+  
+  
+<br>
+<br>
+<!--table for students for a particular branch , session, date. -->
+<div class="container fluid">
+  <div class="form-group">
+    <table id="booking_table" class = 'table' style = 'margin-left: 100px; margin-right: 0px; width: 90%;'>
+        <thead>
+              <tr>
+                  <th>ID</th>
+                  <th>First name</th>
+                  <th>Last name</th>
+                  <th>Course ID</th>
+                  <th></th>
+                  <th></th>
+              </tr>
+
+        </thead>
+        <tbody>
+          {% for student in book_list %}
+            <tr>
+                <td><a data-toggle="tooltip" title="Click to View Student Details" href = "{{ url_for('edit_student', studentID=student['studentID']) }}">{{student["studentID"]}}</a></td>
+                <td>{{student["firstName"]}}</td>
+                <td>{{student["lastName"]}}</td>
+                <td>{{student["courseID"]}}</td>
+
+                <!--if action is booked then show button for check in -->
+                {% if student["action"] == 'book' %}
+                <td> <a href = "{{ url_for('check_in', attenID=student['attenbookingID'], datetext=edatepicked, campusid=ecampusID, sessionMenu=request.args.get('sessionid')) }}" class="btn btn-info" role="button">Check in</a> </td>
+                <!--if action is already check in (been checked as present) then show checked in button which is changeable to check in button -->
+                {% elif student["action"] == 'checkin' %}
+                  <td> <a href = "{{ url_for('cancel', attenID=student['attenbookingID'], datetext=edatepicked, campusid=ecampusID, sessionMenu=request.args.get('sessionid')) }}" class="btn btn-outline-danger  role="button">Cancel</a> </td>
+                {% endif %}
+
+            </tr>
+          {% endfor %}
+        </tbody>
+    </table>
+  </div>
+</div>
+
+<br>
+<br>
+
+<!--Search students table-->
+<div class="container">
+  <div class="container fluid"></div>
+  <div class="form-group">
+      <div class="container fluid">
+          <h3>Find a Student</h3>
+          <table id="student_search_table" class = 'display' style = 'display: none; margin-right: 100px; width: 90%;'>
+              <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Email Address</th>
+                    <th>Add to Above class</th>
+                </tr>
+              </thead>
+              <tbody>
+                    {% for student in list_of_students %}
+                            <tr>
+
+                                <td> <a data-toggle="tooltip" title="Click to View Student Details" href = "{{ url_for('edit_student', studentID=student['studentID']) }}">{{student["studentID"]}}</a></td>
+                                <td>{{student["firstName"]}} {{student["lastName"]}}</td>
+                                <td>{{student["emailAddress"]}}</td>
+                                <td>
+                                  <!--if campus, date and session not selected then dont show 'add to class above' button-->
+                                {% if edatepicked != None and ecampusID != None and request.args.get('sessionid') !=None %}
+                                <a href = "{{ url_for('book_student', studentID=student['studentID'], datetext=edatepicked, campusid=ecampusID, sessionMenu=request.args.get('sessionid')) }}" class="btn btn-info" role="button">Add to Class Above</a>
+                                {% else %}
+                                please select a class above
+                                {% endif %}
+                                </td>
+                            </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        </div>
+
+        <!--This script is for student search datatable-->
+        <script type="text/javascript" class="init">$(document).ready( function () {
+            $('#student_search_table').DataTable(
+                {
+                          language: {
+                                  searchPlaceholder: "Search for a student"
+                              },
+                              search: "_INPUT_",
+                              "dom": '<"top"f>rt<"bottom"><"clear">',
+                              "deferLoading": [ 0,0 ],
+                                          "search": '',
+                                          "search": {
+                                              "smart": false
+                                              },
+                                          //"scrollY":        "100px",
+                                      // "pageLength": 2,
+                                  "scrollCollapse": true,
+                                  "paging":         true,
+                          "fnDrawCallback": function( oSettings ) {
+                          if($('#student_search_table_filter input').val() != '')
+                             {
+                              $('#student_search_table').css("display","");
+                              }
+                          else {
+                                  $('#student_search_table').css("display","none");
+                                  }
+                           }
+                       })});
+
+
+
+                // listening events on controls to avoid having a url button dropdown which didn't show the item selected
+                // avoided  having a button click event after selecting item in list
+                // by julie - this was hard figuring this out and took me some time
+                // I really want to spend some time learning Javascript and the DOM as I only pieced this together without really understanding it
+
+                // have to be with the page else they generate errors referencing the object
+
+
+                  //session menu click
+                document.addEventListener('DOMContentLoaded',function() {
+                    document.querySelector('select[name="sessionMenu"]').onchange=changeEventSession;
+                },false);
+                //session
+                function changeEventSession(event) {
+                    // You can use “this” to refer to the selected element.
+                    if(!event.target.value) alert('Please Select session');
+                    else
+                    window.location = "/index?datetext=" + datepicker.value +  "&campusid=" + campus.value + "&sessionid=" + event.target.value;
+
+                }
+
+
+
+                 //campus menu click - main page populates the calendar with disabled dates based on campus and stat hols too
+                 //passes list of disabled dates for the dropdown selected location
+                 document.addEventListener('DOMContentLoaded',function() {
+                  document.querySelector('select[name="campus"]').onchange=changeEventCampus;
+              },false);
+              //campus
+              function changeEventCampus(event) {
+                  // You can use “this” to refer to the selected element.
+                  if(!event.target.value) alert('Please Select campus');
+                  else
+                  //alert('You clicked' + event.target.value + "/julieindex?campusid=" + event.target.value  );//"&campusid={{campusID|safe}}");
+                  window.location = "/index?campusid=" + event.target.value;
+
+                  //getDisabledDates(event.target.value);
+
+              }
+
+
+      // when click calendar get sessions for that day and populate sessions dropdown list
+      function updateCaption(dateText)
+          {
+          //alert("/api/getsessions.html?datetext=" + dateText + "&campusid=" + campus.value) // {{campus|safe}}"
+              $.ajax({url: "/api/getsessions.html?datetext=" + dateText + "&campusid=" + campus.value, success: function(result){
+                      $("#sessionMenu").html(result);
+                  }});
+          }
+
+            //passes list of disabled dates for the dropdown selected location
+              var array = {{ disabled_dates|safe }}
+                    $( function() {
+                      $('#datepicker').datepicker({
+                            onSelect: function (dateText, inst) {
+      //                         alert(dateText);
+    //                           document.getElementById('sessionMenu').innerHTML ='<a class="dropdown-item" href="#">' + dateText + '</a>';
+                              updateCaption(dateText);
+
+                            },
+
+                              dateFormat: "dd-mm-yy",
+
+                              beforeShowDay: function(date){
+                              var string = jQuery.datepicker.formatDate('dd-mm-yy', date);
+                              return [ array.indexOf(string) == -1 ]
+                          }
+                        });
+                    } );
+
+                    // when click calendar get sessions for that day and populate sessions dropdown list
+                    function updateCaption(dateText)
+                      {
+                        //alert("/api/getsessions.html?datetext=" + dateText + "&campusid=" + campus.value) // {{campus|safe}}"
+                          $.ajax({url: "/api/getsessions.html?datetext=" + dateText + "&campusid=" + campus.value, success: function(result){
+                                  $("#sessionMenu").html(result);
+                              }});
+                      }
+
+
+
+                    // when click calendar get sessions for that day and populate sessions dropdown list
+                    function updateCaption(dateText)
+                      {
+                        //alert("/api/getsessions.html?datetext=" + dateText + "&campusid=" + campus.value) // {{campus|safe}}"
+                          $.ajax({url: "/api/getsessions.html?datetext=" + dateText + "&campusid=" + campus.value, success: function(result){
+                                  $("#sessionMenu").html(result);
+                              }});
+                      }
+
+
+            var array = {{ disabled_dates|safe }}
+                    $( function() {
+                      $('#StartDatepicker').datepicker({
+                            onSelect: function (dateText, inst) {
+      //                         alert(dateText);
+    //                           document.getElementById('sessionMenu').innerHTML ='<a class="dropdown-item" href="#">' + dateText + '</a>';
+                              updateCaption(dateText);
+
+                            },
+
+                              dateFormat: "dd-mm-yy",
+
+                              beforeShowDay: function(date){
+                              var string = jQuery.datepicker.formatDate('dd-mm-yy', date);
+                              return [ array.indexOf(string) == -1 ]
+                          }
+                        });
+                    } );
+
+
+
+
+        </script>
+{% endblock %}

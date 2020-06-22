@@ -1,0 +1,26 @@
+
+INSERT INTO `courseinfo` (`courseID`,`courseName`,`program`,`durationinday`,`durationinweek`,`numberofsession`,`courseAvailability`) VALUES ('CFCB110','Computing Basics','ACE',70,10,20,0);
+INSERT INTO `courseinfo` (`courseID`,`courseName`,`program`,`durationinday`,`durationinweek`,`numberofsession`,`courseAvailability`) VALUES ('CFDB110','Access for Beginners','ACE',56,8,16,0);
+INSERT INTO `courseinfo` (`courseID`,`courseName`,`program`,`durationinday`,`durationinweek`,`numberofsession`,`courseAvailability`) VALUES ('CFDB310','Access Enhanced','ACE',63,9,18,0);
+INSERT INTO `courseinfo` (`courseID`,`courseName`,`program`,`durationinday`,`durationinweek`,`numberofsession`,`courseAvailability`) VALUES ('CFDC110','Digital Communications for Beginners','ACE',35,5,10,0);
+INSERT INTO `courseinfo` (`courseID`,`courseName`,`program`,`durationinday`,`durationinweek`,`numberofsession`,`courseAvailability`) VALUES ('CFDK110','Publisher for Beginners','ACE',70,10,20,0);
+INSERT INTO `courseinfo` (`courseID`,`courseName`,`program`,`durationinday`,`durationinweek`,`numberofsession`,`courseAvailability`) VALUES ('CFKY110','Keyboarding for Beginners','ACE',42,6,12,0);
+INSERT INTO `courseinfo` (`courseID`,`courseName`,`program`,`durationinday`,`durationinweek`,`numberofsession`,`courseAvailability`) VALUES ('CFPP110','PowerPoint for Beginners','ACE',35,5,10,0);
+INSERT INTO `courseinfo` (`courseID`,`courseName`,`program`,`durationinday`,`durationinweek`,`numberofsession`,`courseAvailability`) VALUES ('CFPS110','Photoshop for Beginners','ACE',70,10,20,0);
+INSERT INTO `courseinfo` (`courseID`,`courseName`,`program`,`durationinday`,`durationinweek`,`numberofsession`,`courseAvailability`) VALUES ('CFSP110','Excel for Beginners','ACE',70,10,20,0);
+INSERT INTO `courseinfo` (`courseID`,`courseName`,`program`,`durationinday`,`durationinweek`,`numberofsession`,`courseAvailability`) VALUES ('CFSP310','Excel Enhanced','ACE',56,8,16,0);
+INSERT INTO `courseinfo` (`courseID`,`courseName`,`program`,`durationinday`,`durationinweek`,`numberofsession`,`courseAvailability`) VALUES ('CFWB110','Web Design for Beginners','ACE',70,10,20,0);
+INSERT INTO `courseinfo` (`courseID`,`courseName`,`program`,`durationinday`,`durationinweek`,`numberofsession`,`courseAvailability`) VALUES ('CFWP110','Word for Beginners','ACE',70,10,20,0);
+INSERT INTO `courseinfo` (`courseID`,`courseName`,`program`,`durationinday`,`durationinweek`,`numberofsession`,`courseAvailability`) VALUES ('CFWP310','Word Enhanced','ACE',84,12,24,0);
+INSERT INTO `courseinfo` (`courseID`,`courseName`,`program`,`durationinday`,`durationinweek`,`numberofsession`,`courseAvailability`) VALUES ('ITTL300','Operating in a Digital Environment','Level 3',112,16,32,0);
+INSERT INTO `courseinfo` (`courseID`,`courseName`,`program`,`durationinday`,`durationinweek`,`numberofsession`,`courseAvailability`) VALUES ('ITTL310','Spreadsheets and Databases','Level 3',112,16,32,0);
+INSERT INTO `courseinfo` (`courseID`,`courseName`,`program`,`durationinday`,`durationinweek`,`numberofsession`,`courseAvailability`) VALUES ('ITTL320','Web Fundamentals','Level 3',112,16,32,0);
+INSERT INTO `courseinfo` (`courseID`,`courseName`,`program`,`durationinday`,`durationinweek`,`numberofsession`,`courseAvailability`) VALUES ('ITTL330','Presenting in a Digital Environment','Level 3',112,16,32,0);
+INSERT INTO `courseinfo` (`courseID`,`courseName`,`program`,`durationinday`,`durationinweek`,`numberofsession`,`courseAvailability`) VALUES ('ITTL340','Going Mobile','Level 3',112,16,32,0);
+INSERT INTO `courseinfo` (`courseID`,`courseName`,`program`,`durationinday`,`durationinweek`,`numberofsession`,`courseAvailability`) VALUES ('ITTL350','Online Etiquette and Ethics','Level 3',112,16,32,0);
+INSERT INTO `courseinfo` (`courseID`,`courseName`,`program`,`durationinday`,`durationinweek`,`numberofsession`,`courseAvailability`) VALUES ('ITTL400','Advanced Tools A','Level 4',112,16,32,0);
+INSERT INTO `courseinfo` (`courseID`,`courseName`,`program`,`durationinday`,`durationinweek`,`numberofsession`,`courseAvailability`) VALUES ('ITTL410','Advanced Tools B','Level 4',112,16,32,0);
+INSERT INTO `courseinfo` (`courseID`,`courseName`,`program`,`durationinday`,`durationinweek`,`numberofsession`,`courseAvailability`) VALUES ('ITTL420','Project Planning','Level 4',112,16,32,0);
+INSERT INTO `courseinfo` (`courseID`,`courseName`,`program`,`durationinday`,`durationinweek`,`numberofsession`,`courseAvailability`) VALUES ('ITTL430','Problem Solving','Level 4',112,16,32,0);
+INSERT INTO `courseinfo` (`courseID`,`courseName`,`program`,`durationinday`,`durationinweek`,`numberofsession`,`courseAvailability`) VALUES ('ITTL440','Connecting in a Business Environment','Level 4',112,16,32,0);
+INSERT INTO `courseinfo` (`courseID`,`courseName`,`program`,`durationinday`,`durationinweek`,`numberofsession`,`courseAvailability`) VALUES ('ITTL450','Security and Future Trends','Level 4',112,16,32,0);

@@ -1,0 +1,11 @@
+userID,campusID,firstName,middleName,lastName,email,userName,password_hash
+1,1,Julie,,"Stalker ",stalker.julie@gmail.com,,
+2,1,Oscar,,Vanhanen,oscar.vanhanen@gmail.com,,
+3,2,Kattia,,Sliva,kcontatos12@gmail.com,,
+4,3,"Chuan ",,Li,loislichuan@gmail.com,,
+5,4,Fallon,,Abbott,lectus@sodales.org,,
+6,5,Nayda,,Slater,augue.Sed@molestie.com,,
+7,6,Oliver,,Collier,sodales.nisi.magna@massa.org,,
+8,2,Rose,,Castillo,nisi@sapien.net,,
+9,7,Zachary,,Santos,tellus.justo.sit@Aliquam.ca,,
+10,5,Martena,,Mcconnel,commodo@ipsumleo.com|,,

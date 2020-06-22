@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+<!-- Oscars work -->
+{% block content %}
+<br>
+<br>
+<div style='margin-left: 100px; width: 45%;'>
+
+  <h4>Edit the student here:</h4>
+    <form action="{{url_for('edit_student') }}" method="POST">
+
+        <p>Student ID: <input class="form-control" type="text" name="studentID" style="width: 100%;" value="{{student_details["studentID"]}}" readonly/> </p>
+        <p>First name: <input class="form-control" type="text" name="firstName" style="width: 100%;" value="{{student_details["firstName"]}}" required maxlength = "45" /> </p>
+        <p>Last name: <input class="form-control" type="text" name="lastName" style="width: 100%;" value="{{student_details["lastName"]}}" required maxlength = "45" /></p>
+        <p>Mobile Ph.: <input class="form-control" type="text" name="MobileNumber" style="width: 100%;" value="{{student_details["mobileNumber"]}}" required maxlength = "45"  /></p>
+        <p>Home Ph.: <input class="form-control" type="text" name="homePhoneNumber" style="width: 100%;" value="{{student_details["homePhoneNumber"]}}" required maxlength = "45"  /></p>
+        <p>Email: <input class="form-control" type="email" name="email" style="width: 100%;" value="{{student_details["emailAddress"]}}" /></p>
+
+        <p>Last moodle activity: <input type="text" class="form-control" name="moodle" id="moodle" autocomplete="off" name="dateEntered" value="{{student_details["lastMoodleEngagement"]}}"/>
+          <script>
+            $( function() {
+            $( "#moodle" ).datepicker({dateFormat: "yy-mm-dd"});
+              } );
+          </script>
+
+        <p>Notes: <input class="form-control" type="text" name="notes" style="width: 100%;" value="{{student_details["note"]}}"/> </p>
+      <br>
+      <p><input class="btn btn-secondary" type="submit" value="Update student" /></p>
+    </form>
+</div>
+
+{% endblock %}

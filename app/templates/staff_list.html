@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+
+<!--place where templates can be inserted. Blocks are given a unique name that templates can reference julie-->
+{% block content %}
+    <!--table for no_session by particular branch , session, date.
+        by julie -->
+
+        <div class ="container-fluid px-20 py-10 pt-sm-2 pb-sm-2 main-color-bg">
+            <div class="row align-items-center">
+                <div class="col-md-3" >
+                    <img src="static/images/Ara-Landscape-Logo.png"  class="img-responsive" alt="Responsive image" width="80%">
+                </div>
+                <div class="col-md-9">
+                    <div class="container fluid">
+                        <div class ="danger"> 
+                                <h4>Staff accounts</h4>
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+              
+                
+                
+    <div class="container fluid">
+            <div class="form-group">
+              <table id="nosession_table" class = 'table' style = 'margin-left: 100px; margin-right: 0px; width: 90%;'>
+                  <thead>
+                        <tr>
+                            <th>Staff Login Name</th>
+                            <th>email</th>
+                            <th></th>
+                            
+                        </tr>
+          
+          
+          
+                  </thead>
+                  <tbody>
+                    {% for staff in list_staff %}
+                      <tr>                        
+                          <td>{{staff["userName"]}}</a></td>
+                          <td>{{staff["email"]}}</td>
+                          <td> <a href = "{{ url_for('delete_staff', userID=staff['id']) }}" class="btn btn-info" role="button">Delete</a> </td>
+                      </tr>
+                    {% endfor %}
+                  </tbody>
+                  <tr>                        
+                        <td> <a href = "{{ url_for('register') }}" class="btn btn-info" role="button">Add New Staff</a> </td>        
+                    </tr>
+              </table>
+            </div>
+          </div>
+
+          {% endblock %}
